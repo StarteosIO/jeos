@@ -57,8 +57,8 @@ publishing {
                 url = 'https://github.com/StarteosIO/jeos'
                 licenses {
                     license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        name = 'MIT License'
+                        url = 'https://github.com/HaiChecker/jeos/blob/master/LICENSE'
                         distribution = 'repo'
                     }
                 }
@@ -101,7 +101,7 @@ bintray {
         repo = 'maven'
         name = 'jeos'
         userOrg = bintrayUser
-        licenses = ['Apache-2.0']
+        licenses = ['MIT License']
         vcsUrl = 'https://github.com/StarteosIO/jeos.git'
         websiteUrl = 'https://github.com/StarteosIO/jeos.git'
         issueTrackerUrl = 'https://github.com/StarteosIO/jeos/issues'
