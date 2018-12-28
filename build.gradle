@@ -1,0 +1,140 @@
+
+
+buildscript {
+    repositories {
+        //使用阿里的maven镜像
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public'}
+    }
+    dependencies {
+        //引入bintray插件
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.1'
+    }
+}
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'java-library'
+    id 'signing'
+}
+apply plugin: 'com.jfrog.bintray'
+ext {
+    did = project.hasProperty('did') ? project.property('did') : System.getenv('DID')
+    dname = project.hasProperty('dname') ? project.property('dname') : System.getenv('DNAME')
+    demail = project.hasProperty('demail') ? project.property('demail') : System.getenv('DEMAIL')
+    libVersion = project.hasProperty('libVersion') ? project.property('libVersion') : System.getenv('LIBVERSION')
+    ossrhUsername = project.hasProperty('ossrhUsername') ? project.property('ossrhUsername') : System.getenv('OSSRH_USERNAME')
+    ossrhPassword = project.hasProperty('ossrhPassword') ? project.property('ossrhPassword') : System.getenv('OSSRH_PASSWORD')
+    ossrhRepoUrl = project.hasProperty('ossrhRepoUrl') ? project.property('ossrhRepoUrl') : System.getenv('OSSRH_REPO_URL')
+    bintrayUser = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    bintrayKey = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    bintrayGpgPassphrase = project.hasProperty('bintrayGpgPassphrase') ? project.property('bintrayGpgPassphrase') : System.getenv('BINTRAY_GPG_PASSPHRASE')
+}
+group = 'io.starteos'
+version = libVersion
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'jeos'
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            version libVersion
+            pom {
+                name = 'jeos'
+                description = 'Android And Java Libs'
+                url = 'https://github.com/StarteosIO/jeos'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution = 'repo'
+                    }
+                }
+                developers {
+                    developer {
+                        id = did
+                        name = dname
+                        email = demail
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/StarteosIO/jeos.git'
+                    developerConnection = 'scm:git:ssh://github.com/StarteosIO/jeos.git'
+                    url = 'https://github.com/StarteosIO/jeos'
+                }
+
+            }
+        }
+    }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+//            def releasesRepoUrl = "$buildDir/repos/releases"
+//            def snapshotsRepoUrl = "$buildDir/repos/snapshots"
+            url = ossrhRepoUrl
+        }
+    }
+}
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html4', true)
+    }
+}
+bintray {
+    user = bintrayUser
+    key = bintrayApiKey
+    publications = ['mavenJava']//关联到上文maven publication的名字
+    publish = true
+    pkg {
+        repo = 'maven'
+        name = 'jeos'
+        userOrg = bintrayUser
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/StarteosIO/jeos.git'
+        websiteUrl = 'https://github.com/StarteosIO/jeos.git'
+        issueTrackerUrl = 'https://github.com/StarteosIO/jeos/issues'
+//        githubRepo = 'https://github.com/StarteosIO/jeos.git'
+        publicDownloadNumbers = true
+
+        labels = ['java', 'android', 'eos']
+        version {
+            gpg{
+                sign = true
+                passphrase = bintrayGpgPassphrase
+            }
+            mavenCentralSync {
+                sync = false//是否同步到中央仓库
+                user = ossrhUsername//见下文
+                password = ossrhPassword//见下文
+                close = '1'
+            }
+
+        }
+    }
+}
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    google()
+}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'com.google.code.gson:gson:2.6.2'
+    implementation 'com.google.crypto.tink:tink-android:1.2.1'
+    implementation 'com.google.guava:guava:23.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+}
