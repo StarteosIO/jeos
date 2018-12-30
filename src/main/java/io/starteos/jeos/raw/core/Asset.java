@@ -1,16 +1,17 @@
-package io.starteos.jeos;
+package io.starteos.jeos.raw.core;
+
+import io.starteos.jeos.SymbolType;
+import io.starteos.jeos.exception.SymbolConversionException;
+import io.starteos.jeos.raw.Pack;
+import io.starteos.jeos.utils.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import io.starteos.jeos.exception.SymbolConversionException;
-import io.starteos.jeos.raw.Pack;
-import io.starteos.jeos.utils.StringUtils;
 
-@Deprecated
-public class Symbol implements Pack.Packer {
+public class Asset implements Pack.Packer {
     private static final long[] PRECISION_TABLE = {
             1, 10, 100, 1000, 10000,
             100000, 1000000, 10000000, 100000000,
@@ -22,12 +23,12 @@ public class Symbol implements Pack.Packer {
     private SymbolType symbolType;
 
 
-    public Symbol(long amount, SymbolType symbolName) {
+    public Asset(long amount, SymbolType symbolName) {
         this.amount = amount;
         this.symbolType = symbolName;
     }
 
-    public Symbol(String value) throws SymbolConversionException {
+    public Asset(String value) throws SymbolConversionException {
         value = value.trim();
 
         Pattern pattern = Pattern.compile("^([0-9]+)\\.?([0-9]*)([ ][a-zA-Z0-9]{1,7})?$");//\\s(\\w)$");

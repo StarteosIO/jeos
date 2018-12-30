@@ -1,5 +1,6 @@
 package io.starteos.jeos.transaction;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +9,25 @@ import io.starteos.jeos.crypto.ec.EcDsa;
 import io.starteos.jeos.crypto.ec.EcSignature;
 import io.starteos.jeos.crypto.ec.EosPrivateKey;
 import io.starteos.jeos.crypto.util.HexUtils;
+import io.starteos.jeos.net.StartEOS;
+import io.starteos.jeos.net.response.InfoResponse;
 import io.starteos.jeos.raw.Writer;
+import io.starteos.jeos.raw.core.Action;
 import io.starteos.jeos.transaction.type.ChainTypeId;
 
 public class SignedTransaction extends Transaction {
+
+    public static PackedTransaction createTransactionSync(StartEOS startEOS, List<Action> actions,EosPrivateKey eosPrivateKey) throws IOException {
+        InfoResponse infoResponse = startEOS.info().send();
+        SignedTransaction signedTransaction = new SignedTransaction();
+        signedTransaction.setReferenceBlock(infoResponse.getHead_block_id());
+        signedTransaction.setExpiration(infoResponse.getTimeAfterHeadBlockTime(30000));
+        signedTransaction.addActions(actions);
+        signedTransaction.sign(eosPrivateKey,new ChainTypeId(infoResponse.getChain_id()));
+        return new PackedTransaction(signedTransaction);
+    }
+
+
     private List<String> signatures = null;
 
     private List<String> context_free_data = new ArrayList<>();

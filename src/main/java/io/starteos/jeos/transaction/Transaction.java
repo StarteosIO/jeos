@@ -31,6 +31,13 @@ public class Transaction extends TransactionHeader implements Pack.Packer {
         actions.add(action);
     }
 
+    public void addActions(List<Action> actions) {
+        if (this.actions == null) {
+            this.actions = new ArrayList<>();
+        }
+        this.actions.addAll(actions);
+    }
+
 
     protected <T> List<T> deepCopyOnlyContainer(List<T> srcList) {
         if (null == srcList) {
