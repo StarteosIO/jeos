@@ -27,6 +27,7 @@ package io.starteos.jeos.crypto.ec;
 import com.google.common.base.Preconditions;
 
 import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Arrays;
 
 import io.starteos.jeos.crypto.Hmac;
@@ -39,7 +40,11 @@ import io.starteos.jeos.raw.Writer;
  */
 
 public class EcDsa {
+    private static final SecureRandom mSecRandom;
 
+    static {
+        mSecRandom = new SecureRandom();
+    }
     private static class SigChecker {
         BigInteger e;
         BigInteger privKey;
@@ -75,7 +80,6 @@ public class EcDsa {
         }
     }
 
-
     private static BigInteger deterministicGenerateK(CurveParam curveParam, byte[] hash, BigInteger d, SigChecker checker, int nonce ){
         if ( nonce > 0 ){
             hash = Sha256.from(hash, BigInteger.valueOf(nonce).toByteArray()).getBytes();
@@ -89,7 +93,8 @@ public class EcDsa {
 
         // Step c
         byte [] k = new byte[32];
-        Arrays.fill(k, (byte)0x00);
+        mSecRandom.nextBytes(k);
+//        Arrays.fill(k, (byte)0x00);
 
         // Step d
         Writer bwD = new Writer(32 + 1 + 32 + 32);

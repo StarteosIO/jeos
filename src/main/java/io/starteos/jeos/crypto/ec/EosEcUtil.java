@@ -30,8 +30,11 @@ import io.starteos.jeos.crypto.digest.Ripemd160;
 import io.starteos.jeos.crypto.digest.Sha256;
 import io.starteos.jeos.crypto.util.Base58;
 import io.starteos.jeos.crypto.util.BitUtils;
+import io.starteos.jeos.raw.Writer;
 import io.starteos.jeos.utils.RefValue;
 import io.starteos.jeos.utils.StringUtils;
+
+import static com.google.crypto.tink.integration.android.AndroidKeystoreKmsClient.PREFIX;
 
 /**
  * Created by swapnibble on 2018-02-02.
@@ -169,32 +172,56 @@ public class EosEcUtil {
 //        return EOS_PREFIX + ( isR1 ? PREFIX_R1 : "") + Base58.encode( result );
 //    }
 
+    /**
+     * 弃用以前的
+     * @param prefix
+     * @param curveParam
+     * @param data
+     * @return
+     */
     public static String encodeEosCrypto(String prefix, CurveParam curveParam, byte[] data ) {
+//        String typePart = "";
+//        if ( curveParam != null ) {
+//            if ( curveParam.isType( CurveParam.SECP256_K1)) {
+//                typePart = PREFIX_K1;
+//            }
+//            else
+//            if ( curveParam.isType( CurveParam.SECP256_R1)){
+//                typePart = PREFIX_R1;
+//            }
+//        }
+
+//        byte[] toHashData = new byte[ data.length + typePart.length() ];
+//        System.arraycopy( data, 0, toHashData, 0, data.length);
+//        if ( typePart.length() > 0 ) {
+//            System.arraycopy( typePart.getBytes(), 0, toHashData, data.length, typePart.length());
+//        }
+//
+//        byte[] dataToEncodeBase58 = new byte[ data.length + 4 ];
+//
+//        Ripemd160 ripemd160 = Ripemd160.from( toHashData);
+//        byte[] checksumBytes = ripemd160.bytes();
+//
+//        System.arraycopy( data, 0, dataToEncodeBase58, 0, data.length); // copy source data
+//        System.arraycopy( checksumBytes, 0, dataToEncodeBase58, data.length, 4); // copy checksum data
         String typePart = "";
-        if ( curveParam != null ) {
-            if ( curveParam.isType( CurveParam.SECP256_K1)) {
+        if (curveParam != null) {
+            if (curveParam.isType(CurveParam.SECP256_K1)) {
                 typePart = PREFIX_K1;
-            }
-            else
-            if ( curveParam.isType( CurveParam.SECP256_R1)){
+            } else if (curveParam.isType(CurveParam.SECP256_R1)) {
                 typePart = PREFIX_R1;
             }
         }
 
-        byte[] toHashData = new byte[ data.length + typePart.length() ];
-        System.arraycopy( data, 0, toHashData, 0, data.length);
-        if ( typePart.length() > 0 ) {
-            System.arraycopy( typePart.getBytes(), 0, toHashData, data.length, typePart.length());
-        }
-
-        byte[] dataToEncodeBase58 = new byte[ data.length + 4 ];
-
-        Ripemd160 ripemd160 = Ripemd160.from( toHashData);
-        byte[] checksumBytes = ripemd160.bytes();
-
-        System.arraycopy( data, 0, dataToEncodeBase58, 0, data.length); // copy source data
-        System.arraycopy( checksumBytes, 0, dataToEncodeBase58, data.length, 4); // copy checksum data
-
+        Writer first = new Writer(255);
+        first.putBytes(data);
+        first.putBytes(typePart.getBytes());
+        Ripemd160 ripemd160 = Ripemd160.from(first.toBytes());
+        byte[] rmd = new byte[4];
+        System.arraycopy(ripemd160.bytes(), 0, rmd, 0, rmd.length);
+        Writer last = new Writer(255);
+        last.putBytes(data);
+        last.putBytes(rmd);
 
         String result;
         if ( StringUtils.isEmpty( typePart)) {
@@ -204,7 +231,7 @@ public class EosEcUtil {
             result = prefix + EOS_CRYPTO_STR_SPLITTER + typePart + EOS_CRYPTO_STR_SPLITTER;
         }
 
-        return result + Base58.encode( dataToEncodeBase58 );
+        return result + Base58.encode( last.toBytes() );
     }
 
 
