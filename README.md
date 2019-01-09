@@ -7,9 +7,9 @@ JEOS for Java, Android.
 
 ## Getting Started
 
-[ ![Download](https://api.bintray.com/packages/haicheckerdev/maven/jeos/images/download.svg?version=1.0.0) ](https://bintray.com/haicheckerdev/maven/jeos/1.0.0/link)
+[ ![Download](https://api.bintray.com/packages/haicheckerdev/maven/jeos/images/download.svg?version=1.0.2) ](https://bintray.com/haicheckerdev/maven/jeos/1.0.2/link)
 
-Gradle `compile 'io.starteos:jeos:1.0.0'`
+Gradle `compile 'io.starteos:jeos:1.0.2'`
 
 ### Thanks 
 

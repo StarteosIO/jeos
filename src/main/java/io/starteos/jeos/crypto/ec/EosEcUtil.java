@@ -173,7 +173,7 @@ public class EosEcUtil {
 //    }
 
     /**
-     * 弃用以前的
+     *
      * @param prefix
      * @param curveParam
      * @param data
