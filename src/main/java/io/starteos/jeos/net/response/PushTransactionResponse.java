@@ -1,5 +1,6 @@
 package io.starteos.jeos.net.response;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -42,11 +43,11 @@ public class PushTransactionResponse extends BaseResponse {
          */
 
         private String id;
-        private int block_num;
+        private long block_num;
         private String block_time;
         private ReceiptBean receipt;
-        private int elapsed;
-        private int net_usage;
+        private long elapsed;
+        private long net_usage;
         private boolean scheduled;
         private List<Traces> action_traces;
 
@@ -66,11 +67,11 @@ public class PushTransactionResponse extends BaseResponse {
             this.id = id;
         }
 
-        public int getBlock_num() {
+        public long getBlock_num() {
             return block_num;
         }
 
-        public void setBlock_num(int block_num) {
+        public void setBlock_num(long block_num) {
             this.block_num = block_num;
         }
 
@@ -90,19 +91,19 @@ public class PushTransactionResponse extends BaseResponse {
             this.receipt = receipt;
         }
 
-        public int getElapsed() {
+        public long getElapsed() {
             return elapsed;
         }
 
-        public void setElapsed(int elapsed) {
+        public void setElapsed(long elapsed) {
             this.elapsed = elapsed;
         }
 
-        public int getNet_usage() {
+        public long getNet_usage() {
             return net_usage;
         }
 
-        public void setNet_usage(int net_usage) {
+        public void setNet_usage(long net_usage) {
             this.net_usage = net_usage;
         }
 
@@ -122,8 +123,8 @@ public class PushTransactionResponse extends BaseResponse {
              */
 
             private String status;
-            private int cpu_usage_us;
-            private int net_usage_words;
+            private long cpu_usage_us;
+            private long net_usage_words;
 
             public String getStatus() {
                 return status;
@@ -133,19 +134,19 @@ public class PushTransactionResponse extends BaseResponse {
                 this.status = status;
             }
 
-            public int getCpu_usage_us() {
+            public long getCpu_usage_us() {
                 return cpu_usage_us;
             }
 
-            public void setCpu_usage_us(int cpu_usage_us) {
+            public void setCpu_usage_us(long cpu_usage_us) {
                 this.cpu_usage_us = cpu_usage_us;
             }
 
-            public int getNet_usage_words() {
+            public long getNet_usage_words() {
                 return net_usage_words;
             }
 
-            public void setNet_usage_words(int net_usage_words) {
+            public void setNet_usage_words(long net_usage_words) {
                 this.net_usage_words = net_usage_words;
             }
         }
@@ -167,10 +168,10 @@ public class PushTransactionResponse extends BaseResponse {
             private ReceiptBean receipt;
             private Act act;
             private boolean context_free;
-            private int elapsed;
+            private long elapsed;
             private String console;
             private String trx_id;
-            private int block_num;
+            private long block_num;
             private String block_time;
             private List<?> account_ram_deltas;
             private List<Traces> inline_traces;
@@ -199,11 +200,11 @@ public class PushTransactionResponse extends BaseResponse {
                 this.context_free = context_free;
             }
 
-            public int getElapsed() {
+            public long getElapsed() {
                 return elapsed;
             }
 
-            public void setElapsed(int elapsed) {
+            public void setElapsed(long elapsed) {
                 this.elapsed = elapsed;
             }
 
@@ -223,11 +224,11 @@ public class PushTransactionResponse extends BaseResponse {
                 this.trx_id = trx_id;
             }
 
-            public int getBlock_num() {
+            public long getBlock_num() {
                 return block_num;
             }
 
-            public void setBlock_num(int block_num) {
+            public void setBlock_num(long block_num) {
                 this.block_num = block_num;
             }
 
@@ -268,10 +269,10 @@ public class PushTransactionResponse extends BaseResponse {
 
                 private String receiver;
                 private String act_digest;
-                private int global_sequence;
-                private int recv_sequence;
-                private int code_sequence;
-                private int abi_sequence;
+                private long global_sequence;
+                private long recv_sequence;
+                private long code_sequence;
+                private long abi_sequence;
                 private List<List<String>> auth_sequence;
 
                 public String getReceiver() {
@@ -290,35 +291,35 @@ public class PushTransactionResponse extends BaseResponse {
                     this.act_digest = act_digest;
                 }
 
-                public int getGlobal_sequence() {
+                public long getGlobal_sequence() {
                     return global_sequence;
                 }
 
-                public void setGlobal_sequence(int global_sequence) {
+                public void setGlobal_sequence(long global_sequence) {
                     this.global_sequence = global_sequence;
                 }
 
-                public int getRecv_sequence() {
+                public long getRecv_sequence() {
                     return recv_sequence;
                 }
 
-                public void setRecv_sequence(int recv_sequence) {
+                public void setRecv_sequence(long recv_sequence) {
                     this.recv_sequence = recv_sequence;
                 }
 
-                public int getCode_sequence() {
+                public long getCode_sequence() {
                     return code_sequence;
                 }
 
-                public void setCode_sequence(int code_sequence) {
+                public void setCode_sequence(long code_sequence) {
                     this.code_sequence = code_sequence;
                 }
 
-                public int getAbi_sequence() {
+                public long getAbi_sequence() {
                     return abi_sequence;
                 }
 
-                public void setAbi_sequence(int abi_sequence) {
+                public void setAbi_sequence(long abi_sequence) {
                     this.abi_sequence = abi_sequence;
                 }
 
@@ -342,7 +343,7 @@ public class PushTransactionResponse extends BaseResponse {
 
                 private String account;
                 private String name;
-                private JsonObject data;
+                private JsonElement data;
                 private String hex_data;
                 private List<AuthorizationBean> authorization;
 
@@ -362,11 +363,11 @@ public class PushTransactionResponse extends BaseResponse {
                     this.name = name;
                 }
 
-                public JsonObject getData() {
+                public JsonElement getData() {
                     return data;
                 }
 
-                public void setData(JsonObject data) {
+                public void setData(JsonElement data) {
                     this.data = data;
                 }
 
