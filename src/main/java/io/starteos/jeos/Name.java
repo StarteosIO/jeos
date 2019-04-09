@@ -10,11 +10,11 @@ public class Name implements Pack.Packer, Pack.Unpacker {
 
     private static final int MAX_NAME_IDX = 12;
     /**
-     * 字符串名�?
+     * 字符串名
      */
     private String name;
 
-    // uint64_t 类型的�??
+    // uint64_t 类型的
     private long value; //uint64_t
 
     public Name(long value) {
@@ -38,9 +38,9 @@ public class Name implements Pack.Packer, Pack.Unpacker {
     }
 
     /**
-     * 返回名称的后�?
+     * 返回名称的后
      *
-     * @return 如果没有则返回当前名�?
+     * @return 如果没有则返回当前名
      */
     public Name suffix() {
 
@@ -94,8 +94,9 @@ public class Name implements Pack.Packer, Pack.Unpacker {
     /**
      * 单个Char转uint64_t
      *
-     * @param c �?要转换的Char
+     * @param c 要转换的Char
      * @return uint64_t
+     * @throws NameConversionException  名称转换错误
      */
     public static byte charToValue(char c) throws NameConversionException {
         if (c == '.') {

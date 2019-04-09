@@ -37,8 +37,14 @@ public class StartTest {
 
     @Before
     public void init() {
-        startEOS = StartFactory.build(new HttpService("http://192.168.10.120:8888"));
+        startEOS = StartFactory.build(new HttpService("https://api-mainnet.starteos.io"));
         gson = new GsonBuilder().registerTypeAdapterFactory(new GsonAdapterFactory()).create();
+    }
+
+    public static void main(String[] args) throws IOException {
+        StartTest startTest = new StartTest();
+        startTest.init();
+        startTest.tableRow();
     }
 
     @Test
@@ -76,7 +82,9 @@ public class StartTest {
     @Test
     public void tableRow() throws IOException {
         System.out.println("Start get table rows...");
-        Request<TableRowsRequest, TableRowsResponse<String>> request = startEOS.tableRow("eosio.token", "eosio.token", "accounts", null);
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("limit",1);
+        Request<TableRowsRequest, TableRowsResponse<String>> request = startEOS.tableRow("eosio", "eosio", "rammarket", params);
         TableRowsResponse<String> tableRowsResponse = request.send();
         (tableRowsResponse.isError() ? System.err : System.out).println(tableRowsResponse.isError() ? Arrays.toString(tableRowsResponse.getError().getDetails().toArray()) : gson.toJson(tableRowsResponse));
 
@@ -102,6 +110,7 @@ public class StartTest {
         (abiJsonToBinResponse.isError() ? System.err : System.out).println(abiJsonToBinResponse.isError() ? Arrays.toString(abiJsonToBinResponse.getError().getDetails().toArray()) : gson.toJson(abiJsonToBinResponse));
 
     }
+
     @Test
     public void send() throws IOException, NameConversionException, PermissionException {
         ArrayList<Action> actions = new ArrayList<>();
@@ -113,7 +122,7 @@ public class StartTest {
         } catch (NameConversionException e) {
             e.printStackTrace();
         }
-        actions.add(Action.toAction("auction.e","del","auction.e@active", writer.toBytes()));
+        actions.add(Action.toAction("auction.e", "del", "auction.e@active", writer.toBytes()));
         InfoResponse infoResponse = startEOS.info().send();
         SignedTransaction signedTransaction = new SignedTransaction();
         signedTransaction.setReferenceBlock(infoResponse.getHead_block_id());
@@ -121,20 +130,21 @@ public class StartTest {
         signedTransaction.setExpiration(infoResponse.getTimeAfterHeadBlockTime(30000));
         BlockResponse blockResponse = startEOS.block(infoResponse.getHead_block_id()).send();
         signedTransaction.setRef_block_prefix(blockResponse.getRef_block_prefix());
-        signedTransaction.setRef_block_num(blockResponse.getBlock_num());
+        signedTransaction.setRef_block_num((int) blockResponse.getBlock_num());
         for (Action action : actions) {
             signedTransaction.addAction(action);
         }
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add(new EosPrivateKey("5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3").getPublicKey().toString());
-        RequiredKeysResponse requiredKeysResponse = startEOS.getRequiredKeys(gson.toJson(signedTransaction),arrayList).send();
+        RequiredKeysResponse requiredKeysResponse = startEOS.getRequiredKeys(gson.toJson(signedTransaction), arrayList).send();
         System.out.println(gson.toJson(signedTransaction));
-        signedTransaction.sign(new EosPrivateKey("5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"),new ChainTypeId(infoResponse.getChain_id()));
+        signedTransaction.sign(new EosPrivateKey("5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"), new ChainTypeId(infoResponse.getChain_id()));
         PackedTransaction packedTransaction = new PackedTransaction(signedTransaction);
-         startEOS.pushTransaction(packedTransaction.getSignatures(),packedTransaction.getCompression(),packedTransaction.getPacked_context_free_data(),packedTransaction.getPacked_trx()).send();
+        startEOS.pushTransaction(packedTransaction.getSignatures(), packedTransaction.getCompression(), packedTransaction.getPacked_context_free_data(), packedTransaction.getPacked_trx()).send();
 //        a63c235c1701a9d8636300000000000000010000506052979136000000000000a24a01000050605297913600000000a8ed32321080a9026352979136010000000000000000
 //        7c34235cc2f06bd0193300000000010000506052979136000000000000a24a01000050605297913600000000a8ed32321080a9026352979136010000000000000000
     }
+
     @Test
     public void abiBinToJson() throws IOException {
         System.out.println("Start bin to json...");

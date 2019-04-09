@@ -26,16 +26,16 @@ public class InfoResponse extends BaseResponse {
 
     private String server_version;
     private String chain_id;
-    private int head_block_num;
-    private int last_irreversible_block_num;
+    private long head_block_num;
+    private long last_irreversible_block_num;
     private String last_irreversible_block_id;
     private String head_block_id;
     private String head_block_time;
     private String head_block_producer;
-    private int virtual_block_cpu_limit;
-    private int virtual_block_net_limit;
-    private int block_cpu_limit;
-    private int block_net_limit;
+    private long virtual_block_cpu_limit;
+    private long virtual_block_net_limit;
+    private long block_cpu_limit;
+    private long block_net_limit;
     private String server_version_string;
 
     public String getServer_version() {
@@ -70,19 +70,19 @@ public class InfoResponse extends BaseResponse {
         this.chain_id = chain_id;
     }
 
-    public int getHead_block_num() {
+    public long getHead_block_num() {
         return head_block_num;
     }
 
-    public void setHead_block_num(int head_block_num) {
+    public void setHead_block_num(long head_block_num) {
         this.head_block_num = head_block_num;
     }
 
-    public int getLast_irreversible_block_num() {
+    public long getLast_irreversible_block_num() {
         return last_irreversible_block_num;
     }
 
-    public void setLast_irreversible_block_num(int last_irreversible_block_num) {
+    public void setLast_irreversible_block_num(long last_irreversible_block_num) {
         this.last_irreversible_block_num = last_irreversible_block_num;
     }
 
@@ -118,35 +118,35 @@ public class InfoResponse extends BaseResponse {
         this.head_block_producer = head_block_producer;
     }
 
-    public int getVirtual_block_cpu_limit() {
+    public long getVirtual_block_cpu_limit() {
         return virtual_block_cpu_limit;
     }
 
-    public void setVirtual_block_cpu_limit(int virtual_block_cpu_limit) {
+    public void setVirtual_block_cpu_limit(long virtual_block_cpu_limit) {
         this.virtual_block_cpu_limit = virtual_block_cpu_limit;
     }
 
-    public int getVirtual_block_net_limit() {
+    public long getVirtual_block_net_limit() {
         return virtual_block_net_limit;
     }
 
-    public void setVirtual_block_net_limit(int virtual_block_net_limit) {
+    public void setVirtual_block_net_limit(long virtual_block_net_limit) {
         this.virtual_block_net_limit = virtual_block_net_limit;
     }
 
-    public int getBlock_cpu_limit() {
+    public long getBlock_cpu_limit() {
         return block_cpu_limit;
     }
 
-    public void setBlock_cpu_limit(int block_cpu_limit) {
+    public void setBlock_cpu_limit(long block_cpu_limit) {
         this.block_cpu_limit = block_cpu_limit;
     }
 
-    public int getBlock_net_limit() {
+    public long getBlock_net_limit() {
         return block_net_limit;
     }
 
-    public void setBlock_net_limit(int block_net_limit) {
+    public void setBlock_net_limit(long block_net_limit) {
         this.block_net_limit = block_net_limit;
     }
 

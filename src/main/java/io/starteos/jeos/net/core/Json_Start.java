@@ -96,12 +96,10 @@ public class Json_Start implements StartEOS {
             for (String s : params.keySet()) {
                 try {
                     String first = String.valueOf(s.charAt(0));
-                    Method method = tableRowsRequest.getClass().getMethod("set" + s.replaceFirst(first, first.toUpperCase()), Preconditions.checkNotNull(params.get(s)).getClass());
+                    Method method = TableRowsRequest.class.getDeclaredMethod("set" + s.replaceFirst(first, first.toUpperCase()), Preconditions.checkNotNull(params.get(s)).getClass());
                     method.invoke(tableRowsRequest, params.get(s));
-                } catch (NoSuchMethodException ignored) {
-                } catch (IllegalAccessException ignored) {
-                } catch (InvocationTargetException ignored) {
-                } catch (NullPointerException ignored) {
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | NullPointerException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -149,12 +147,9 @@ public class Json_Start implements StartEOS {
             for (String s : params.keySet()) {
                 try {
                     String first = String.valueOf(s.charAt(0));
-                    Method method = tableRowsByScopeRequest.getClass().getMethod("set" + s.replaceFirst(first, first.toUpperCase()), Preconditions.checkNotNull(params.get(s).getClass()));
+                    Method method = TableRowsByScopeRequest.class.getDeclaredMethod("set" + s.replaceFirst(first, first.toUpperCase()), Preconditions.checkNotNull(params.get(s).getClass()));
                     method.invoke(tableRowsByScopeRequest, params.get(s));
-                } catch (NoSuchMethodException ignored) {
-                } catch (IllegalAccessException ignored) {
-                } catch (InvocationTargetException ignored) {
-                } catch (NullPointerException ignored) {
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | NullPointerException ignored) {
                 }
             }
         }
@@ -189,7 +184,7 @@ public class Json_Start implements StartEOS {
 //                    requiredKeysResponse.setAvailable_keys(new ArrayList<String>());
 //                    return requiredKeysResponse;
 //                }
-                requiredKeysResponse = gson.fromJson(data,RequiredKeysResponse.class);
+                requiredKeysResponse = gson.fromJson(data, RequiredKeysResponse.class);
                 return requiredKeysResponse;
             }
         });

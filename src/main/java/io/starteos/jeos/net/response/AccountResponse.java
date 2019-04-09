@@ -26,18 +26,18 @@ public class AccountResponse extends BaseResponse {
      */
 
     private String account_name;
-    private int head_block_num;
+    private long head_block_num;
     private String head_block_time;
     private boolean privileged;
     private String last_code_update;
     private String created;
     private String core_liquid_balance;
-    private int ram_quota;
-    private int net_weight;
-    private int cpu_weight;
+    private long ram_quota;
+    private long net_weight;
+    private long cpu_weight;
     private NetLimitBean net_limit;
     private CpuLimitBean cpu_limit;
-    private int ram_usage;
+    private long ram_usage;
     private TotalResourcesBean total_resources;
     private SelfDelegatedBandwidthBean self_delegated_bandwidth;
     private RefundRequestBean refund_request;
@@ -52,11 +52,11 @@ public class AccountResponse extends BaseResponse {
         this.account_name = account_name;
     }
 
-    public int getHead_block_num() {
+    public long getHead_block_num() {
         return head_block_num;
     }
 
-    public void setHead_block_num(int head_block_num) {
+    public void setHead_block_num(long head_block_num) {
         this.head_block_num = head_block_num;
     }
 
@@ -100,27 +100,27 @@ public class AccountResponse extends BaseResponse {
         this.core_liquid_balance = core_liquid_balance;
     }
 
-    public int getRam_quota() {
+    public long getRam_quota() {
         return ram_quota;
     }
 
-    public void setRam_quota(int ram_quota) {
+    public void setRam_quota(long ram_quota) {
         this.ram_quota = ram_quota;
     }
 
-    public int getNet_weight() {
+    public long getNet_weight() {
         return net_weight;
     }
 
-    public void setNet_weight(int net_weight) {
+    public void setNet_weight(long net_weight) {
         this.net_weight = net_weight;
     }
 
-    public int getCpu_weight() {
+    public long getCpu_weight() {
         return cpu_weight;
     }
 
-    public void setCpu_weight(int cpu_weight) {
+    public void setCpu_weight(long cpu_weight) {
         this.cpu_weight = cpu_weight;
     }
 
@@ -140,11 +140,11 @@ public class AccountResponse extends BaseResponse {
         this.cpu_limit = cpu_limit;
     }
 
-    public int getRam_usage() {
+    public long getRam_usage() {
         return ram_usage;
     }
 
-    public void setRam_usage(int ram_usage) {
+    public void setRam_usage(long ram_usage) {
         this.ram_usage = ram_usage;
     }
 
@@ -195,31 +195,31 @@ public class AccountResponse extends BaseResponse {
          * max : 2421320
          */
 
-        private int used;
-        private int available;
-        private int max;
+        private long used;
+        private long available;
+        private long max;
 
-        public int getUsed() {
+        public long getUsed() {
             return used;
         }
 
-        public void setUsed(int used) {
+        public void setUsed(long used) {
             this.used = used;
         }
 
-        public int getAvailable() {
+        public long getAvailable() {
             return available;
         }
 
-        public void setAvailable(int available) {
+        public void setAvailable(long available) {
             this.available = available;
         }
 
-        public int getMax() {
+        public long getMax() {
             return max;
         }
 
-        public void setMax(int max) {
+        public void setMax(long max) {
             this.max = max;
         }
     }
@@ -231,31 +231,31 @@ public class AccountResponse extends BaseResponse {
          * max : 802998
          */
 
-        private int used;
-        private int available;
-        private int max;
+        private long used;
+        private long available;
+        private long max;
 
-        public int getUsed() {
+        public long getUsed() {
             return used;
         }
 
-        public void setUsed(int used) {
+        public void setUsed(long used) {
             this.used = used;
         }
 
-        public int getAvailable() {
+        public long getAvailable() {
             return available;
         }
 
-        public void setAvailable(int available) {
+        public void setAvailable(long available) {
             this.available = available;
         }
 
-        public int getMax() {
+        public long getMax() {
             return max;
         }
 
-        public void setMax(int max) {
+        public void setMax(long max) {
             this.max = max;
         }
     }
@@ -271,7 +271,7 @@ public class AccountResponse extends BaseResponse {
         private String owner;
         private String net_weight;
         private String cpu_weight;
-        private int ram_bytes;
+        private long ram_bytes;
 
         public String getOwner() {
             return owner;
@@ -297,11 +297,11 @@ public class AccountResponse extends BaseResponse {
             this.cpu_weight = cpu_weight;
         }
 
-        public int getRam_bytes() {
+        public long getRam_bytes() {
             return ram_bytes;
         }
 
-        public void setRam_bytes(int ram_bytes) {
+        public void setRam_bytes(long ram_bytes) {
             this.ram_bytes = ram_bytes;
         }
     }
@@ -411,10 +411,10 @@ public class AccountResponse extends BaseResponse {
 
         private String owner;
         private String proxy;
-        private int staked;
+        private long staked;
         private String last_vote_weight;
         private String proxied_vote_weight;
-        private int is_proxy;
+        private long is_proxy;
         private List<?> producers;
 
         public String getOwner() {
@@ -433,11 +433,11 @@ public class AccountResponse extends BaseResponse {
             this.proxy = proxy;
         }
 
-        public int getStaked() {
+        public long getStaked() {
             return staked;
         }
 
-        public void setStaked(int staked) {
+        public void setStaked(long staked) {
             this.staked = staked;
         }
 
@@ -457,11 +457,11 @@ public class AccountResponse extends BaseResponse {
             this.proxied_vote_weight = proxied_vote_weight;
         }
 
-        public int getIs_proxy() {
+        public long getIs_proxy() {
             return is_proxy;
         }
 
-        public void setIs_proxy(int is_proxy) {
+        public void setIs_proxy(long is_proxy) {
             this.is_proxy = is_proxy;
         }
 
@@ -517,16 +517,16 @@ public class AccountResponse extends BaseResponse {
              * waits : []
              */
 
-            private int threshold;
+            private long threshold;
             private List<KeysBean> keys;
             private List<AccountsBean> accounts;
             private List<?> waits;
 
-            public int getThreshold() {
+            public long getThreshold() {
                 return threshold;
             }
 
-            public void setThreshold(int threshold) {
+            public void setThreshold(long threshold) {
                 this.threshold = threshold;
             }
 
@@ -561,7 +561,7 @@ public class AccountResponse extends BaseResponse {
                  */
 
                 private String key;
-                private int weight;
+                private long weight;
 
                 public String getKey() {
                     return key;
@@ -571,11 +571,11 @@ public class AccountResponse extends BaseResponse {
                     this.key = key;
                 }
 
-                public int getWeight() {
+                public long getWeight() {
                     return weight;
                 }
 
-                public void setWeight(int weight) {
+                public void setWeight(long weight) {
                     this.weight = weight;
                 }
             }
@@ -587,7 +587,7 @@ public class AccountResponse extends BaseResponse {
                  */
 
                 private PermissionBean permission;
-                private int weight;
+                private long weight;
 
                 public PermissionBean getPermission() {
                     return permission;
@@ -597,11 +597,11 @@ public class AccountResponse extends BaseResponse {
                     this.permission = permission;
                 }
 
-                public int getWeight() {
+                public long getWeight() {
                     return weight;
                 }
 
-                public void setWeight(int weight) {
+                public void setWeight(long weight) {
                     this.weight = weight;
                 }
 

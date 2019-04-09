@@ -24,12 +24,12 @@ public class BlockHeaderStateResponse extends BaseResponse {
      */
 
     private String id;
-    private int block_num;
+    private long block_num;
     private HeaderBean header;
-    private int dpos_proposed_irreversible_blocknum;
-    private int dpos_irreversible_blocknum;
-    private int bft_irreversible_blocknum;
-    private int pending_schedule_lib_num;
+    private long dpos_proposed_irreversible_blocknum;
+    private long dpos_irreversible_blocknum;
+    private long bft_irreversible_blocknum;
+    private long pending_schedule_lib_num;
     private String pending_schedule_hash;
     private PendingScheduleBean pending_schedule;
     private ActiveScheduleBean active_schedule;
@@ -48,11 +48,11 @@ public class BlockHeaderStateResponse extends BaseResponse {
         this.id = id;
     }
 
-    public int getBlock_num() {
+    public long getBlock_num() {
         return block_num;
     }
 
-    public void setBlock_num(int block_num) {
+    public void setBlock_num(long block_num) {
         this.block_num = block_num;
     }
 
@@ -64,35 +64,35 @@ public class BlockHeaderStateResponse extends BaseResponse {
         this.header = header;
     }
 
-    public int getDpos_proposed_irreversible_blocknum() {
+    public long getDpos_proposed_irreversible_blocknum() {
         return dpos_proposed_irreversible_blocknum;
     }
 
-    public void setDpos_proposed_irreversible_blocknum(int dpos_proposed_irreversible_blocknum) {
+    public void setDpos_proposed_irreversible_blocknum(long dpos_proposed_irreversible_blocknum) {
         this.dpos_proposed_irreversible_blocknum = dpos_proposed_irreversible_blocknum;
     }
 
-    public int getDpos_irreversible_blocknum() {
+    public long getDpos_irreversible_blocknum() {
         return dpos_irreversible_blocknum;
     }
 
-    public void setDpos_irreversible_blocknum(int dpos_irreversible_blocknum) {
+    public void setDpos_irreversible_blocknum(long dpos_irreversible_blocknum) {
         this.dpos_irreversible_blocknum = dpos_irreversible_blocknum;
     }
 
-    public int getBft_irreversible_blocknum() {
+    public long getBft_irreversible_blocknum() {
         return bft_irreversible_blocknum;
     }
 
-    public void setBft_irreversible_blocknum(int bft_irreversible_blocknum) {
+    public void setBft_irreversible_blocknum(long bft_irreversible_blocknum) {
         this.bft_irreversible_blocknum = bft_irreversible_blocknum;
     }
 
-    public int getPending_schedule_lib_num() {
+    public long getPending_schedule_lib_num() {
         return pending_schedule_lib_num;
     }
 
-    public void setPending_schedule_lib_num(int pending_schedule_lib_num) {
+    public void setPending_schedule_lib_num(long pending_schedule_lib_num) {
         this.pending_schedule_lib_num = pending_schedule_lib_num;
     }
 
@@ -183,11 +183,11 @@ public class BlockHeaderStateResponse extends BaseResponse {
 
         private String timestamp;
         private String producer;
-        private int confirmed;
+        private long confirmed;
         private String previous;
         private String transaction_mroot;
         private String action_mroot;
-        private int schedule_version;
+        private long schedule_version;
         private String producer_signature;
         private List<?> header_extensions;
 
@@ -207,11 +207,11 @@ public class BlockHeaderStateResponse extends BaseResponse {
             this.producer = producer;
         }
 
-        public int getConfirmed() {
+        public long getConfirmed() {
             return confirmed;
         }
 
-        public void setConfirmed(int confirmed) {
+        public void setConfirmed(long confirmed) {
             this.confirmed = confirmed;
         }
 
@@ -239,11 +239,11 @@ public class BlockHeaderStateResponse extends BaseResponse {
             this.action_mroot = action_mroot;
         }
 
-        public int getSchedule_version() {
+        public long getSchedule_version() {
             return schedule_version;
         }
 
-        public void setSchedule_version(int schedule_version) {
+        public void setSchedule_version(long schedule_version) {
             this.schedule_version = schedule_version;
         }
 
@@ -270,14 +270,14 @@ public class BlockHeaderStateResponse extends BaseResponse {
          * producers : []
          */
 
-        private int version;
+        private long version;
         private List<?> producers;
 
-        public int getVersion() {
+        public long getVersion() {
             return version;
         }
 
-        public void setVersion(int version) {
+        public void setVersion(long version) {
             this.version = version;
         }
 
@@ -296,14 +296,14 @@ public class BlockHeaderStateResponse extends BaseResponse {
          * producers : [{"producer_name":"atticlabeosb","block_signing_key":"EOS7u1N2MuJj3BVTBgyb8BT3oQ41NNLHuaxcbGuYU6uuNBh1KUPck"},{"producer_name":"bitfinexeos1","block_signing_key":"EOS4tkw7LgtURT3dvG3kQ4D1sg3aAtPDymmoatpuFkQMc7wzZdKxc"},{"producer_name":"cochainworld","block_signing_key":"EOS5QDSQyh96SmktA28dteEchc1QCVdqKYG4YVDHGGATMYxqy33wi"},{"producer_name":"eos42freedom","block_signing_key":"EOS4tw7vH62TcVtMgm2tjXzn9hTuHEBbGPUK2eos42ssY7ip4LTzu"},{"producer_name":"eosauthority","block_signing_key":"EOS4va3CTmAcAAXsT26T3EBWqYHgQLshyxsozYRgxWm9tjmy17pVV"},{"producer_name":"eosbeijingbp","block_signing_key":"EOS5dGpcEhwB4VEhhXEcqtZs9EQj5HeetuXDnsAGVHMXHAFdMjbdj"},{"producer_name":"eosbixinboot","block_signing_key":"EOS7QC1XfAtkYeLjbHQjcDWVqUsxuSJ3YRhNyG93VAv2u3uHopGVp"},{"producer_name":"eoscanadacom","block_signing_key":"EOS7eycxAbCtKyfoJc8uRZcmt1AmArjXcz8aonLUTzahk5rHc18NJ"},{"producer_name":"eoscannonchn","block_signing_key":"EOS73cTi9V7PNg4ujW5QzoTfRSdhH44MPiUJkUV6m3oGwj7RX7kML"},{"producer_name":"eosdacserver","block_signing_key":"EOS6VkageCqyz1X97n7E1JyjPoZu8HEX6CVujY5ABzk3fPyV3vzZK"},{"producer_name":"eosflytomars","block_signing_key":"EOS6Agpfp38bTyRjJDmB4Qb1EpQSq7wnEAsALXgXE7KFSzKjokkFD"},{"producer_name":"eoshuobipool","block_signing_key":"EOS5XKswW26cR5VQeDGwgNb5aixv1AMcKkdDNrC59KzNSBfnH6TR7"},{"producer_name":"eoslaomaocom","block_signing_key":"EOS8QgURqo875qu3a8vgZ58qBeu2cTehe9zAWRfpdCXAQipicu1Fi"},{"producer_name":"eosliquideos","block_signing_key":"EOS4v1n2j5kXbCum8LLEc8zQLpeLK9rKVFmsUgLCWgMDN38P6PcrW"},{"producer_name":"eosnationftw","block_signing_key":"EOS8PkNNBYU1xnbcjBUNm1mT6N68QiGvCDgPT97rqurLBEjDanSXK"},{"producer_name":"eosnewyorkio","block_signing_key":"EOS6GVX8eUqC1gN1293B3ivCNbifbr1BT6gzTFaQBXzWH9QNKVM4X"},{"producer_name":"eosriobrazil","block_signing_key":"EOS7RioGoHQnhv2fJEiciP9Q7J8JgfJYFcyofVkmCqMop8Q1PzgqP"},{"producer_name":"eosswedenorg","block_signing_key":"EOS7SGSBsWhSob6TEric6u3TGodcc1uXFcqSrquJ3Etuqcbb3VnNY"},{"producer_name":"jedaaaaaaaaa","block_signing_key":"EOS6nB9Ar5sghWjqk27bszCiA9zxQtXZCaAaEkf2nwUm9iP5MEJTT"},{"producer_name":"starteosiobp","block_signing_key":"EOS4wZZXm994byKANLuwHD6tV3R3Mu3ktc41aSVXCBaGnXJZJ4pwF"},{"producer_name":"zbeosbp11111","block_signing_key":"EOS7rhgVPWWyfMqjSbNdndtCK8Gkza3xnDbUupsPLMZ6gjfQ4nX81"}]
          */
 
-        private int version;
+        private long version;
         private List<ProducersBean> producers;
 
-        public int getVersion() {
+        public long getVersion() {
             return version;
         }
 
-        public void setVersion(int version) {
+        public void setVersion(long version) {
             this.version = version;
         }
 
@@ -348,14 +348,14 @@ public class BlockHeaderStateResponse extends BaseResponse {
          * _node_count : 32663121
          */
 
-        private int _node_count;
+        private long _node_count;
         private List<String> _active_nodes;
 
-        public int get_node_count() {
+        public long get_node_count() {
             return _node_count;
         }
 
-        public void set_node_count(int _node_count) {
+        public void set_node_count(long _node_count) {
             this._node_count = _node_count;
         }
 

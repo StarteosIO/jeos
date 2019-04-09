@@ -30,7 +30,7 @@ import java.math.BigInteger;
  *
  * <p>
  * Satoshi says: why base-58 instead of standard base-64 encoding?
- * <p>
+ * </p>
  *
  * <ul>
  * <li>Don't want 0OIl characters that look the same in some fonts and could be
@@ -55,7 +55,12 @@ public class Base58 {
         }
     }
 
-    /** Encodes the given bytes in base58. No checksum is appended. */
+
+    /**
+     * Encodes the given bytes in base58. No checksum is appended.
+     * @param input 需要编码的数据
+     * @return 返回Base58
+     */
     public static String encode(byte[] input) {
         if (input.length == 0) {
             return "";

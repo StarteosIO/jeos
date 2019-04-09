@@ -56,7 +56,7 @@ public class TableRowsRequest extends BaseRequest {
         return json;
     }
 
-    public void setJson(boolean json) {
+    public void setJson(Boolean json) {
         this.json = json;
     }
 
@@ -104,7 +104,7 @@ public class TableRowsRequest extends BaseRequest {
         return limit;
     }
 
-    public void setLimit(int limit) {
+    public void setLimit(Integer limit) {
         this.limit = limit;
     }
 }

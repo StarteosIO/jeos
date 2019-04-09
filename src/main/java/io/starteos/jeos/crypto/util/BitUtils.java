@@ -121,6 +121,8 @@ public class BitUtils {
 
    /**
     * Returns a copy of the given byte array in reverse order.
+    * @param bytes
+    * @return
     */
    public static byte[] reverseBytes(byte[] bytes) {
       byte[] buf = new byte[bytes.length];
@@ -134,7 +136,7 @@ public class BitUtils {
     *
     * @param size The number of bytes read
     * @return The array of bytes read.
-    * @throws IOException
+    * @throws IOException Exc
     */
    public static byte[] readBytes(DataInputStream stream, int size) throws IOException {
       byte[] buf = new byte[size];
