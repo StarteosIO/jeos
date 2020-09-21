@@ -100,6 +100,11 @@ public class EosPrivateKey {
             throw new IllegalArgumentException("Invalid private key length");
         }
 
+        if (keyBytes.length == 33 && keyBytes[32] == 1) {
+            // remove compression flag
+            keyBytes = Arrays.copyOfRange(keyBytes, 0, keyBytes.length - 1);
+        }
+
         mPrivateKey = getOrCreatePrivKeyBigInteger( keyBytes );
         mPublicKey = new EosPublicKey(findPubKey( mPrivateKey ), mCurveParam);
     }
