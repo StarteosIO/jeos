@@ -17,6 +17,7 @@ public abstract class Service implements StartService {
     public Service() {
         gson = new GsonBuilder()
                 .registerTypeAdapterFactory(new GsonAdapterFactory())
+                .disableHtmlEscaping()
                 .create();
     }
 
