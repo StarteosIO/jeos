@@ -26,6 +26,7 @@ package io.starteos.jeos.crypto.ec;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 import io.starteos.jeos.crypto.digest.Sha256;
 import io.starteos.jeos.crypto.util.Base58;
