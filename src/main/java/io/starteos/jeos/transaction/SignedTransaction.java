@@ -64,7 +64,7 @@ public class SignedTransaction extends Transaction {
         return Sha256.from(writer.toBytes()).getBytes();
     }
 
-    private Sha256 getDigestForSignature(ChainTypeId chainId) {
+    public Sha256 getDigestForSignature(ChainTypeId chainId) {
         Writer writer = new Writer(255);
 
         // data layout to sign :
